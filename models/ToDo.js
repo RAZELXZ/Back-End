@@ -15,6 +15,7 @@ const ToDoSchema = new Schema(
         },
         completedAt: {
             type: Date,
+            default: null,
         }
     },
     {
