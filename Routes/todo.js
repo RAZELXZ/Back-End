@@ -47,4 +47,69 @@ router.post("/current", requiresAuth, async (req, res) => {
     }
 })
 
+
+router.post("/:toDoId/complete", requiresAuth, async (req, res) => {
+    try {
+        const toDo = await ToDo.findOne({
+            user: req.user._id,
+            _id: req.params.toDoId,
+        });
+        if (!toDo) {
+            return res.status(404).json({error: 'Could not find ToDo.'});
+        }
+        if (toDo.complete) {
+            return res.status(400).json({error: 'ToDo is already completed.'});
+        }
+        const updatedToDo = await ToDo.findOneAndUpdate(
+            {
+                user: req.user._id,
+                _id: req.params.toDoId,
+            },
+            {
+                complete:true,
+                completeAt: new Date(),
+            },
+            {
+                new: true,
+            }
+        )
+        return res.json(updatedToDo);
+    } catch (err) {
+        console.log(err);
+        return res.status(500).send(err.message);
+    }
+})
+
+router.post("/:toDoId/Incomplete", requiresAuth, async (req, res) => {
+    try {
+        const toDo = await ToDo.findOne({
+            user: req.user._id,
+            _id: req.params.toDoId,
+        });
+        if (!toDo) {
+            return res.status(404).json({error: 'Could not find ToDo.'});
+        }
+        if (!toDo.complete) {
+            return res.status(400).json({error: 'ToDo is already Incompleted.'});
+        }
+        const updatedToDo = await ToDo.findOneAndUpdate(
+            {
+                user: req.user._id,
+                _id: req.params.toDoId,
+            },
+            {
+                complete: false,
+                completeAt: null,
+            },
+            {
+                new: true,
+            }
+        )
+        return res.json(updatedToDo);
+    } catch (err) {
+        console.log(err);
+        return res.status(500).send(err.message);
+    }
+})
+
 module.exports = router;
