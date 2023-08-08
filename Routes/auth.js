@@ -77,7 +77,7 @@ router.post("/login", async (req, res) => {
 
 
 
-router.get('/current', reqireAuth, (req, res) => {
+router.get("/current", reqireAuth, (req, res) => {
     if (!req.user) {
         return res.status(401).send(Unauthorized);
     }

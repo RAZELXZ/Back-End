@@ -28,6 +28,8 @@ const reqireAuth = async (req, res, next) => {
         } else {
             return res.status(401).send("Unauthorised");
         }
+    } else {
+        return res.status(401).send("Unauthorised");
     }
 }
 module.exports = reqireAuth;
