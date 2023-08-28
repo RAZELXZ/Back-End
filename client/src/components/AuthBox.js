@@ -24,7 +24,7 @@ const AuthBox = ({register}) => {
                     </div>
                     {register &&                     
                         <div className="auth__field">
-                            <label>ConfirmPassword</label>
+                            <label>Confirm Password</label>
                             <input type="text" />
                         </div>
                     }
