@@ -116,6 +116,11 @@ botton, input, textarea {
         .btn {
             width: 100%;
         }
+        .auth__error {
+            margin-bottom: 10px;
+            text-align: center;
+            font-size: 1.25rem;
+        }
     }
 
     &__error {

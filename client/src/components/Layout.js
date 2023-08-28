@@ -9,7 +9,7 @@ const Layout = () => {
             
             <Routes>
                 <Route exact path= "/" element={<AuthBox />}/>
-                <Route path= "/test" element={<h1>Test</h1>}/>
+                <Route path= "/register" element={<AuthBox register={true}/>}/>
             </Routes>
         </Router>
     )
