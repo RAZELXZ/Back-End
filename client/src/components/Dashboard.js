@@ -1,10 +1,38 @@
-import React from "react";
-import { GlobalContext } from "../context/GlobalContext";
+import React, { useEffect } from "react";
+import { GlobalContext, useGlobalContext } from "../context/GlobalContext";
 import { useNavigate } from "react-router-dom";
+import ToDoCard from "./ToDoCard";
 
 const Dashboard = () => {
+    const {user, completeToDos, incompleteToDos} = useGlobalContext();
+    const navigate = useNavigate();
+    useEffect(() => {
+        if (!user && navigate) {
+            navigate("/")
+        }
+    }, [user, navigate])
+    //console.log(incompleteToDos);
+    //console.log(completeToDos);
     return (
-        <h1>Dashboard</h1>
+        <div className="dashboard">
+            <div className="todos">
+                {incompleteToDos.map((toDo) => (
+                    //console.log(toDo.content);
+                    //<h1 key={toDo._id}>{toDo.content}</h1>
+                    <ToDoCard todo={toDo} key={toDo._id}/>
+                    //{console.log(toDo.content)}
+                ))}
+            </div>
+            {completeToDos.length > 0 && (
+                <div className="todos">
+                    <h2 className="todos__title">Complete ToDo's</h2>
+                    {completeToDos.map(toDo => (
+                        //<h1 className="todos__title" key={toDo._id}>{toDo.content}</h1>
+                        <ToDoCard todo={toDo} key={toDo._id}/>
+                    ))}
+                </div>
+            )}
+        </div>
     )
 }
 

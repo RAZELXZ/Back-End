@@ -35,11 +35,11 @@ router.post("/current", requiresAuth, async (req, res) => {
             user: req.user._id,
             complete: true,
         }).sort({completeAt: -1});
-        const IncompleteTodos = await ToDo.find({
+        const incompleteTodos = await ToDo.find({
             user: req.user._id,
             complete: false,
         }).sort({createdAt: -1});
-        return res.json({completeTodos: completeTodos, IncompleteTodos: IncompleteTodos});
+        return res.json({completeTodos: completeTodos, incompleteTodos: incompleteTodos});
 
     } catch (err) {
         console.log(err);

@@ -55,8 +55,8 @@ export const GlobalProvider = (props) => {
                 const toDosRes = await axios.post("api/todos/current")
                 if (toDosRes.data) {
                     dispatch({type: "SET_USER", payload: res.data});
-                    dispatch({type: "SET_COMPLETE_TODOS", payload: toDosRes.data.complete});
-                    dispatch({type: "SET_INCOMPLETE_TODOS", payload: toDosRes.data.incomplete});
+                    dispatch({type: "SET_COMPLETE_TODOS", payload: toDosRes.data.completeTodos});
+                    dispatch({type: "SET_INCOMPLETE_TODOS", payload: toDosRes.data.incompleteTodos});
                 }
             } else {
                 dispatch({type: "RESET_USER"});
@@ -69,7 +69,7 @@ export const GlobalProvider = (props) => {
 
     const Logout = async () => {
         try {
-            await axios.put("/api/auth/logout");
+            await axios.put("api/auth/logout");
             dispatch({type: "RESET_USER"});
         } catch(err) {
             console.log(err);

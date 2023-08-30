@@ -6,8 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "server": "nodemon server.js --ignore client",
-    "client": "cd client && npm start",
-    "dev": "concurrently \"npm run client\" \"npm run server\""
+    "client": "cd client &&  npm start",
+    "dev": "concurrently \"npm run client\" \"node server.js\""
   },
   "keywords": [],
   "author": "",
