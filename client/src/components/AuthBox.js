@@ -40,8 +40,9 @@ const AuthBox = ({register}) => {
             };
         }
 
-        axios.post(register ? "/api/auth/register" : "/api/auth/login", data)
+        axios.post(register ? "http://localhost:5001/api/auth/register" : "api/auth/login", data)
         .then(() => {
+            console.log("login success")
             getCurrentUser();
         }).catch (err => {
             setLoading(false);
