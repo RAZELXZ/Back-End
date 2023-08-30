@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { GlobalContext, useGlobalContext } from "../context/GlobalContext";
+import { useGlobalContext } from "../context/GlobalContext";
 import { useNavigate } from "react-router-dom";
 import ToDoCard from "./ToDoCard";
 
@@ -8,7 +8,7 @@ const Dashboard = () => {
     const navigate = useNavigate();
     useEffect(() => {
         if (!user && navigate) {
-            navigate("/")
+            navigate("/");
         }
     }, [user, navigate])
     //console.log(incompleteToDos);

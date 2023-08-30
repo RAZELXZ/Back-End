@@ -16,27 +16,23 @@ const ToDoCard = ({todo}) => {
         setEditing(false);
         setContent(todo.content);
     }
-    const onSave = e => {
-        e.preventDefault();
-        
-    }
     return (
-        <div className={`todo ${todo.complete ? 'todo--complete' : ''}`}>
+        <div className={`todo ${todo.complete ? "todo--complete" : ""}`}>
             <input type="checkbox" checked={todo.complete}/>
 
-            <input type="text" ref = {input} value={content} readOnly={!editing} onChange={e => setContent(e.target.value)}/>
+            <input type="text" ref = {input} value={content} readOnly={!editing} onChange={(e) => setContent(e.target.value)}/>
 
             <div className="todo__controls">
                 {!editing ? (
-                    <div>
+                    <>
                         {!todo.complete && <button onClick={onEdit}>Edit</button>}
                         <button>Delete</button>
-                    </div>
+                    </>
                 ) : (
-                    <div>
+                    <>
                         <button onClick={onCancel}>Cancel</button>
-                        <button onClick={onSave}>Save</button>
-                    </div>
+                        <button>Save</button>
+                    </>
                 )}
             </div>
         </div>

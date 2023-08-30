@@ -30,8 +30,9 @@ const globalReducer = (state, action) => {
         case "RESET_USER":
             return {
                 ...state,
+                user: null,
                 completeToDos: [],
-                incomplete: [],
+                incompleteToDos: [],
                 fetchingUser: false,
             }
         default:
