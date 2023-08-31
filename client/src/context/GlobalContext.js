@@ -81,12 +81,45 @@ export const GlobalProvider = (props) => {
     const addTodo = (todo) => {
         dispatch({type: "SET_INCOMPLETE_TODOS", payload: [todo, ...state.incompleteToDos]});
     }
+
+    const markComplete = (todo) => {
+        dispatch({type: "SET_INCOMPLETE_TODOS", payload: state.incompleteToDos.filter((incompleteToDos) => incompleteToDos._id !== todo._id)});
+        dispatch({type: "SET_COMPLETE_TODOS", payload: [todo, ...state.completeToDos]});
+    }
+    const markIncomplete = (todo) => {
+        dispatch({type: "SET_COMPLETE_TODOS", payload: state.completeToDos.filter((completeToDos) => completeToDos._id !== todo._id)});
+        const newIncomplete = [todo, ...state.incompleteToDos];
+        dispatch({type: "SET_INCOMPLETE_TODOS", payload: newIncomplete.sort(
+            (a, b) => b.createAt- a.createdAt
+        ),
+        });
+    }
+
+    const deleteTd = (todo) => {
+        if (todo.complete) {
+            dispatch({type: "SET_COMPLETE_TODOS", payload: state.completeToDos.filter((completeToDos) => completeToDos._id !== todo._id)});
+        } else {
+            dispatch({type: "SET_INCOMPLETE_TODOS", payload: state.incompleteToDos.filter((incompleteToDos) => incompleteToDos._id !== todo._id)});
+        }
+    }
+
+    const saveTd = (todo) => {
+        if (todo.complete) {
+            dispatch({type: "SET_COMPLETE_TODOS", payload: state.completeToDos.map((completeToDos) => completeToDos._id !== todo._id ? completeToDos : todo)});
+        } else {
+            dispatch({type: "SET_INCOMPLETE_TODOS", payload: state.incompleteToDos.map((incompleteToDos) => incompleteToDos._id !== todo._id ? incompleteToDos : todo)});
+        }
+    }
     // action: get current user
     const value = {
         ...state,
         getCurrentUser,
         Logout,
         addTodo,
+        markComplete,
+        markIncomplete,
+        deleteTd,
+        saveTd,
     }
     return (
         <GlobalContext.Provider value={value}>

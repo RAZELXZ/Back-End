@@ -16,7 +16,7 @@ const NewTodo = () => {
     return (
         <form className="new" onSubmit={submit}>
             <input type="text" value = {content} onChange={e => {setContent(e.target.value)}}/>
-            <button className="btn" type="submit"> Submit </button>
+            <button className="btn" type="submit" disabled = {content.length === 0}> Submit </button>
         </form>
     )
 }
